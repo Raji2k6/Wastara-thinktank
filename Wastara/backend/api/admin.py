@@ -4,3 +4,5 @@ from .models import User, Item, ItemRequest
 admin.site.register(User)
 admin.site.register(Item)
 admin.site.register(ItemRequest)
+
+

@@ -45,8 +45,6 @@ body {
   border-radius: 10px; /* Optional: Add rounded corners to the image */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for depth */
   transition: transform 0.3s ease; /* Optional: Add transition for hover effect */
-
-  /* Optional: Add rounded corners to the image */
 }
 
 h1.wastara {
@@ -71,7 +69,7 @@ button {
   border: none;
   padding: 12px 20px;
   margin: 20px; /* Increased margin to move buttons down */
-  border-radius: 15px; /* Rounded corners */
+  border-radius: 4px; /* Rounded corners */
   cursor: pointer;
   font-size: 18px; /* Slightly larger font size */
   transition: background-color 0.3s ease, transform 0.2s ease;

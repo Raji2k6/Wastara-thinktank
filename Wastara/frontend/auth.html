@@ -3,58 +3,31 @@
   <head>
     <title>Login / Signup</title>
     <link rel="stylesheet" href="style.css" />
-    <style>
-      #signup-form,
-      #signin-form {
-        display: none;
-      }
-    </style>
     <link
       href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <body>
-        <div class="left-column">
-          <h1 class="wastara">Welcome to Wastara!</h1>
-          <p>Are you a new or existing user?</p>
-          <button onclick="showForm('signup')">New User</button>
-          <button onclick="showForm('signin')">Existing User</button>
-      
-          <!-- Signup Form -->
-          <div id="signup-form">
-            <h3>Sign Up</h3>
-            <form onsubmit="event.preventDefault(); signup();">
-              <input type="email" placeholder="email" id="signup-username" required /><br />
-              <input type="password" placeholder="Password (min 8 chars)" id="signup-password" minlength="8" required /><br />
-              <button type="submit">Sign Up</button>
-            </form>
-          </div>
-      
-          <!-- Signin Form -->
-          <div id="signin-form">
-            <h3>Sign In</h3>
-            <form onsubmit="event.preventDefault(); signin();">
-              <input type="email" placeholder="email" id="signin-username" required /><br />
-              <input type="password" placeholder="Password" id="signin-password" required /><br />
-              <button type="submit">Sign In</button>
-            </form>
-          </div>
-        </div>
-      
-        <div class="right-column">
-          <img src="wastaralogo.jpg" alt="Wastara App Image" />
-        </div>
-      
-        <script>
-            function showForm(type) {
-              if (type === "signup") {
-                window.location.href = "signup.html"; // Redirect to the Sign Up page
-              } else if (type === "signin") {
-                window.location.href = "signin.html"; // Redirect to the Sign In page
-              }
-            }
-          </script>
+    <div class="left-column">
+      <h1 class="wastara">Welcome to Wastara!</h1>
+      <p>Are you a new or existing user?</p>
+      <button onclick="showForm('signup')">New User</button>
+      <button onclick="showForm('signin')">Existing User</button>
+    </div>
+
+    <div class="right-column">
+      <img src="wastaralogo.jpg" alt="Wastara Logo" />
+    </div>
+
+    <script>
+      function showForm(type) {
+        if (type === "signup") {
+          window.location.href = "signup.html"; // Redirect to the Sign Up page
+        } else if (type === "signin") {
+          window.location.href = "signin.html"; // Redirect to the Sign In page
+        }
+      }
+    </script>
   </body>
 </html>

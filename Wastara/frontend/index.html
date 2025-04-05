@@ -1,19 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Marketplace Home</title>
+    <meta charset="UTF-8" />
+    <title>Wastara Platform</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Circular Economy Marketplace</h1>
-    <a href="login.html">Login</a> | <a href="register.html">Register</a> |
-    <a href="post_item.html">Post Item</a>
-    <h2>Available Materials</h2>
-    <div class="item">
-      <h3>Wood Planks</h3>
-      <p>Description: Leftover wooden planks from construction.</p>
-      <p>Quantity: 50 pieces</p>
-      <button onclick="location.href='request_item.html'">Request Item</button>
-    </div>
+    <h1>♻️ Wastara: Circular Marketplace</h1>
+
+    <!-- Login Form -->
+    <section id="loginSection">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input
+          type="text"
+          id="username"
+          placeholder="Username"
+          required
+        /><br />
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          required
+        /><br />
+        <button type="submit">Login</button>
+      </form>
+    </section>
+
+    <!-- Role Selection -->
+    <section id="roleSection" class="hidden">
+      <h2>Select Role</h2>
+      <button onclick="selectRole('lister')">Act as Lister</button>
+      <button onclick="selectRole('collector')">Act as Collector</button>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboardSection" class="hidden">
+      <h2 id="dashboardTitle"></h2>
+      <div id="dashboardContent"></div>
+      <button onclick="logout()">Logout</button>
+    </section>
+
+    <script src="./scripts/main.js"></script>
   </body>
 </html>

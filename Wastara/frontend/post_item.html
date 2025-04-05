@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Post Item - Wastara</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Post an Item</h1>
+    <form id="postForm">
+      <input type="text" id="title" placeholder="Item Title" required />
+      <textarea
+        id="description"
+        placeholder="Description"
+        rows="3"
+        required
+      ></textarea>
+      <input type="file" id="image" required />
+      <button type="submit">Submit</button>
+    </form>
+    <p><a href="index.html">Back to Home</a></p>
+
+    <script>
+      document
+        .getElementById("postForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const token = localStorage.getItem("token");
+          const formData = new FormData();
+          formData.append("title", document.getElementById("title").value);
+          formData.append(
+            "description",
+            document.getElementById("description").value
+          );
+          formData.append("image", document.getElementById("image").files[0]);
+
+          const res = await fetch("http://127.0.0.1:8000/api/items/", {
+            method: "POST",
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+            body: formData,
+          });
+
+          if (res.ok) {
+            alert("Item posted!");
+          } else {
+            alert("Failed to post item.");
+          }
+        });
+    </script>
+  </body>
+</html>

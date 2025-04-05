@@ -1,47 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <title>Wastara Platform</title>
+    <title>Select Role - Wastara</title>
     <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding-top: 50px;
+      }
+      .role-button {
+        padding: 15px 30px;
+        font-size: 18px;
+        margin: 20px;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
-    <h1>♻️ Wastara: Circular Marketplace</h1>
+    <h2>Welcome to Wastara!</h2>
+    <p>Select your role:</p>
 
-    <!-- Login Form -->
-    <section id="loginSection">
-      <h2>Login</h2>
-      <form id="loginForm">
-        <input
-          type="text"
-          id="username"
-          placeholder="Username"
-          required
-        /><br />
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          required
-        /><br />
-        <button type="submit">Login</button>
-      </form>
-    </section>
+    <button class="role-button" onclick="goToRole('lister')">
+      I am a Lister
+    </button>
+    <button class="role-button" onclick="goToRole('collector')">
+      I am a Collector
+    </button>
 
-    <!-- Role Selection -->
-    <section id="roleSection" class="hidden">
-      <h2>Select Role</h2>
-      <button onclick="selectRole('lister')">Act as Lister</button>
-      <button onclick="selectRole('collector')">Act as Collector</button>
-    </section>
-
-    <!-- Dashboard Section -->
-    <section id="dashboardSection" class="hidden">
-      <h2 id="dashboardTitle"></h2>
-      <div id="dashboardContent"></div>
-      <button onclick="logout()">Logout</button>
-    </section>
-
-    <script src="./scripts/main.js"></script>
+    <script>
+      function goToRole(role) {
+        if (role === "lister") {
+          window.location.href = "post_item.html";
+        } else if (role === "collector") {
+          window.location.href = "request_item.html";
+        }
+      }
+    </script>
   </body>
 </html>

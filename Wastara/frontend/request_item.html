@@ -1,34 +1,76 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Request Items - Wastara</title>
+    <title>Browse Items - Wastara</title>
     <link rel="stylesheet" href="style.css" />
+    <style>
+      .item {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 15px;
+      }
+    </style>
   </head>
   <body>
-    <h1>Available Items</h1>
+    <h2>Available Items</h2>
+
+    <label for="filterTag">Filter by Tag:</label>
+    <select id="filterTag" onchange="fetchItems()">
+      <option value="">All</option>
+      <option value="wood">Wood</option>
+      <option value="metal">Metal</option>
+      <option value="electronics">Electronics</option>
+    </select>
+
     <div id="itemsList"></div>
-    <p><a href="index.html">Back to Home</a></p>
 
     <script>
-      async function loadItems() {
-        const res = await fetch("http://127.0.0.1:8000/api/items/");
-        const items = await res.json();
+      function fetchItems() {
+        const tag = document.getElementById("filterTag").value;
+        let url = "http://127.0.0.1:8000/api/items/";
+        if (tag) {
+          url += `?tag=${tag}`;
+        }
 
-        const list = document.getElementById("itemsList");
-        list.innerHTML = "";
-        items.forEach((item) => {
-          const div = document.createElement("div");
-          div.className = "item";
-          div.innerHTML = `
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-          <img src="${item.image}" width="250" />
-        `;
-          list.appendChild(div);
+        fetch(url)
+          .then((res) => res.json())
+          .then((data) => {
+            const itemsDiv = document.getElementById("itemsList");
+            itemsDiv.innerHTML = "";
+
+            data.forEach((item) => {
+              const div = document.createElement("div");
+              div.className = "item";
+              div.innerHTML = `
+              <h3>${item.name}</h3>
+              <p>${item.description}</p>
+              <p>Quantity: ${item.quantity}</p>
+              <p>Tag: ${item.tag}</p>
+              <img src="${item.image}" width="200"><br>
+              <button onclick="requestItem(${item.id})">Request Item</button>
+            `;
+              itemsDiv.appendChild(div);
+            });
+          });
+      }
+
+      function requestItem(itemId) {
+        fetch("http://127.0.0.1:8000/api/request-item/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ item_id: itemId }),
+        }).then((res) => {
+          if (res.ok) {
+            alert("Request sent!");
+          } else {
+            alert("Failed to request item.");
+          }
         });
       }
 
-      loadItems();
+      fetchItems();
     </script>
   </body>
 </html>

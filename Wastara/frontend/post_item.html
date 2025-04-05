@@ -3,49 +3,77 @@
   <head>
     <title>Post Item - Wastara</title>
     <link rel="stylesheet" href="style.css" />
+    <style>
+      form {
+        width: 300px;
+        margin: auto;
+        padding-top: 50px;
+      }
+      input,
+      textarea,
+      select {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px;
+      }
+    </style>
   </head>
   <body>
-    <h1>Post an Item</h1>
-    <form id="postForm">
-      <input type="text" id="title" placeholder="Item Title" required />
+    <h2>Post a New Item</h2>
+    <form id="postForm" enctype="multipart/form-data">
+      <input type="text" id="name" placeholder="Item Name" required /><br />
       <textarea
         id="description"
-        placeholder="Description"
-        rows="3"
+        placeholder="Item Description"
         required
-      ></textarea>
-      <input type="file" id="image" required />
-      <button type="submit">Submit</button>
+      ></textarea
+      ><br />
+      <input
+        type="number"
+        id="quantity"
+        placeholder="Quantity"
+        required
+      /><br />
+      <input type="file" id="image" accept="image/*" required /><br />
+      <select id="tag" required>
+        <option value="">Select Tag</option>
+        <option value="wood">Wood</option>
+        <option value="metal">Metal</option>
+        <option value="electronics">Electronics</option></select
+      ><br />
+      <button type="submit">Post Item</button>
     </form>
-    <p><a href="index.html">Back to Home</a></p>
 
     <script>
       document
         .getElementById("postForm")
-        .addEventListener("submit", async function (e) {
-          e.preventDefault();
-          const token = localStorage.getItem("token");
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
           const formData = new FormData();
-          formData.append("title", document.getElementById("title").value);
+          formData.append("name", document.getElementById("name").value);
           formData.append(
             "description",
             document.getElementById("description").value
           );
+          formData.append(
+            "quantity",
+            document.getElementById("quantity").value
+          );
           formData.append("image", document.getElementById("image").files[0]);
+          formData.append("tag", document.getElementById("tag").value);
 
-          const res = await fetch("http://127.0.0.1:8000/api/items/", {
+          fetch("http://127.0.0.1:8000/api/post-item/", {
             method: "POST",
-            headers: {
-              Authorization: "Bearer " + token,
-            },
             body: formData,
+          }).then((response) => {
+            if (response.ok) {
+              alert("Item posted successfully!");
+              document.getElementById("postForm").reset();
+            } else {
+              alert("Error posting item.");
+            }
           });
-
-          if (res.ok) {
-            alert("Item posted!");
-          } else {
-            alert("Failed to post item.");
-          }
         });
     </script>
   </body>

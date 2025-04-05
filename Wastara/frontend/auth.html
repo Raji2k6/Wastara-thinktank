@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login / Signup</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      #signup-form,
+      #signin-form {
+        display: none;
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <body>
+        <div class="left-column">
+          <h1 class="wastara">Welcome to Wastara!</h1>
+          <p>Are you a new or existing user?</p>
+          <button onclick="showForm('signup')">New User</button>
+          <button onclick="showForm('signin')">Existing User</button>
+      
+          <!-- Signup Form -->
+          <div id="signup-form">
+            <h3>Sign Up</h3>
+            <form onsubmit="event.preventDefault(); signup();">
+              <input type="text" placeholder="Username" id="signup-username" required /><br />
+              <input type="password" placeholder="Password (min 8 chars)" id="signup-password" minlength="8" required /><br />
+              <button type="submit">Sign Up</button>
+            </form>
+          </div>
+      
+          <!-- Signin Form -->
+          <div id="signin-form">
+            <h3>Sign In</h3>
+            <form onsubmit="event.preventDefault(); signin();">
+              <input type="text" placeholder="Username" id="signin-username" required /><br />
+              <input type="password" placeholder="Password" id="signin-password" required /><br />
+              <button type="submit">Sign In</button>
+            </form>
+          </div>
+        </div>
+      
+        <div class="right-column">
+          <img src="wastaralogo.jpg" alt="Wastara App Image" />
+        </div>
+      
+    <script>
+      function showForm(type) {
+        document.getElementById("signup-form").style.display =
+          type === "signup" ? "block" : "none";
+        document.getElementById("signin-form").style.display =
+          type === "signin" ? "block" : "none";
+      }
+
+      function signup() {
+        const username = document.getElementById("signup-username").value;
+        const password = document.getElementById("signup-password").value;
+        if (password.length < 8) {
+          alert("Password must be at least 8 characters.");
+          return;
+        }
+        alert(`Signed up as ${username}!`);
+        window.location.href = "index.html";
+      }
+
+      function signin() {
+        const username = document.getElementById("signin-username").value;
+        const password = document.getElementById("signin-password").value;
+        alert(`Signed in as ${username}!`);
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>

@@ -1,43 +1,190 @@
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Arial", sans-serif;
+  background-color: #62ae04; /* Fallback color */
+  background-image: url("darkgreen.jpg"); /* Replace 'darkgreen.jpg' with your image file name */
+  background-size: cover; /* Ensures the image covers the entire page */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-attachment: fixed; /* Keeps the background fixed while scrolling */
+  background-position: center; /* Centers the image */
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space between left and right columns */
+  align-items: center; /* Vertically center content */
+  height: 100vh; /* Full viewport height */
+}
+
+.left-column {
+  width: 50%; /* Left column takes 50% of the width */
   padding: 20px;
-  background: #f0f4f8;
-  max-width: 600px;
-  margin: auto;
+  text-align: center; /* Align text to the left */
 }
 
-h1,
-h2 {
-  color: #2b7a78;
+.right-column {
+  width: 50%; /* Right column takes 50% of the width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-input,
-textarea,
+.right-column img {
+  max-width: 90%; /* Responsive image size */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Optional: Add rounded corners to the image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for depth */
+  transition: transform 0.3s ease; /* Optional: Add transition for hover effect */
+
+  /* Optional: Add rounded corners to the image */
+}
+
+h1.wastara {
+  font-family: "Pacifico", cursive; /* Curvy font style */
+  font-size: 50px;
+  color: #d3bc3a; /* Gold yellow color */
+  animation: slideIn 2s ease-out; /* Sliding animation */
+  margin-bottom: 20px;
+}
+
+p {
+  font-family: "Pacifico", cursive; /* Curvy font style */
+  font-size: 22px; /* Slightly larger font size */
+  color: #3ca7d1; /* Sky blue color */
+  margin-bottom: 30px;
+}
+
 button {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-button {
-  background: #3aafa9;
-  color: white;
-  font-weight: bold;
+  font-family: "Pacifico", cursive; /* Curvy font style */
+  background-color: #51901d; /* Lighter green color */
+  color: #f8f8ff; /* Pastel white text */
+  border: none;
+  padding: 12px 20px;
+  margin: 20px; /* Increased margin to move buttons down */
+  border-radius: 15px; /* Rounded corners */
   cursor: pointer;
+  font-size: 18px; /* Slightly larger font size */
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-  background: #2b7a78;
+  background-color: #508a16; /* Even lighter green on hover */
+  transform: scale(1.05); /* Slight zoom effect */
 }
 
-a {
-  color: #3aafa9;
-  text-decoration: none;
+#signup-form,
+#signin-form {
+  display: flex; /* Use flexbox for alignment */
+  flex-direction: column; /* Stack items vertically */
+  align-items: flex-start; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  margin: 20px auto;
+  padding: 20px;
+  width: 300px;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Semi-transparent white background */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  position: absolute; /* Position the form absolutely */
+  top: 50%; /* Move to the middle of the viewport */
+  left: 50%; /* Move to the middle of the viewport */
+  transform: translate(-50%, -50%);
 }
 
-a:hover {
-  text-decoration: underline;
+#signup-form h3,
+#signin-form h3 {
+  font-family: "Pacifico", cursive; /* Curvy font style */
+  font-size: 24px;
+  color: #62ae04; /* Green color to match the theme */
+  margin-bottom: 15px;
+}
+
+#signup-form input,
+#signin-form input {
+  width: 100%; /* Full width with some padding */
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inset shadow */
+}
+
+#signup-form input:focus,
+#signin-form input:focus {
+  border-color: #62ae04; /* Green border on focus */
+  outline: none;
+  box-shadow: 0 0 5px rgba(98, 174, 4, 0.5); /* Green glow effect */
+}
+
+#signup-form button,
+#signin-form button {
+  width: 100%; /* Match input width */
+  padding: 10px;
+  background-color: #62ae04; /* Green background */
+  color: #f8f8ff; /* Pastel white text */
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 10px; /* Add spacing above the button */
+}
+
+#signup-form button:hover,
+#signin-form button:hover {
+  background-color: #4e8b03; /* Slightly darker green on hover */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+form input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+form input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+form button:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+form h3 {
+  margin-bottom: 20px;
+  color: #333;
 }

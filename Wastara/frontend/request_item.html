@@ -4,10 +4,141 @@
     <title>Browse Items - Wastara</title>
     <link rel="stylesheet" href="style.css" />
     <style>
-      .item {
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+        background-image: url("darkgreen.jpg");
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      h2 {
+        margin-top: 20px;
+        font-size: 28px;
+        text-align: center;
+      }
+
+      label {
+        margin-top: 20px;
+        font-size: 16px;
+      }
+
+      select {
+        margin-left: 10px;
+        padding: 8px;
         border: 1px solid #ccc;
-        padding: 10px;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+
+      #itemsList {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+        width: 90%;
+      }
+
+      .item {
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
         margin: 15px;
+        width: 300px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .item img {
+        max-width: 100%;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      .item h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      .item p {
+        font-size: 14px;
+        margin: 5px 0;
+      }
+
+      .item button {
+        background: #6a11cb;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s ease;
+      }
+
+      .item button:hover {
+        background: #2575fc;
+      }
+
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background: #fff;
+        color: #333;
+        border-radius: 10px;
+        padding: 20px;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-content h3 {
+        margin-bottom: 15px;
+      }
+
+      .modal-content button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background: #6a11cb;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .modal-content button:hover {
+        background: #2575fc;
+      }
+
+      .modal-content .close {
+        background: #ccc;
+        color: #333;
+        margin-top: 10px;
       }
     </style>
   </head>
@@ -20,11 +151,56 @@
       <option value="wood">Wood</option>
       <option value="metal">Metal</option>
       <option value="electronics">Electronics</option>
+      <option value="plastic">plastic</option>
+      <option value="clothes">clothes</option>
     </select>
 
-    <div id="itemsList"></div>
+    <div id="itemsList">
+      <div class="item">
+        <img src="wooden chair.jpg" alt="Wood Item" />
+        <h3>Wooden Chair</h3>
+        <p>A sturdy wooden chair for your home.</p>
+        <p><strong>Quantity:</strong> 5</p>
+        <p><strong>Tag:</strong> Wood</p>
+        <button>Request Item</button>
+      </div>
+      <div class="item">
+        <img src="metal table.jpg" alt="Metal Item" />
+        <h3>Metal Table</h3>
+        <p>A durable metal table for outdoor use.</p>
+        <p><strong>Quantity:</strong> 3</p>
+        <p><strong>Tag:</strong> Metal</p>
+        <button>Request Item</button>
+      </div>
+      <div class="item">
+        <img src="smartphone.jpg" alt="Electronics Item" />
+        <h3>Smartphone</h3>
+        <p>A high-end smartphone with great features.</p>
+        <p><strong>Quantity:</strong> 10</p>
+        <p><strong>Tag:</strong> Electronics</p>
+        <button>Request Item</button>
+      </div>
+      <div class="item">
+        <img src="plasticcontainer.jpg" alt="Plastic Item" />
+        <h3>Plastic Container</h3>
+        <p>A set of plastic containers for storage.</p>
+        <p><strong>Quantity:</strong> 20</p>
+        <p><strong>Tag:</strong> Plastic</p>
+        <button>Request Item</button>
+      </div>
+      <div class="item">
+        <img src="winter jacket.jpg" alt="Clothes Item" />
+        <h3>Winter Jacket</h3>
+        <p>A warm winter jacket for cold weather.</p>
+        <p><strong>Quantity:</strong> 8</p>
+        <p><strong>Tag:</strong> Clothes</p>
+        <button>Request Item</button>
+      </div>
+    </div>
 
     <script>
+      let selectedItemId = null;
+
       function fetchItems() {
         const tag = document.getElementById("filterTag").value;
         let url = "http://127.0.0.1:8000/api/items/";
@@ -42,33 +218,52 @@
               const div = document.createElement("div");
               div.className = "item";
               div.innerHTML = `
+              <img src="${item.image}" alt="${item.name}">
               <h3>${item.name}</h3>
               <p>${item.description}</p>
-              <p>Quantity: ${item.quantity}</p>
-              <p>Tag: ${item.tag}</p>
-              <img src="${item.image}" width="200"><br>
-              <button onclick="requestItem(${item.id})">Request Item</button>
+              <p><strong>Quantity:</strong> ${item.quantity}</p>
+              <p><strong>Tag:</strong> ${item.tag}</p>
+              <button onclick="openModal(${item.id}, '${item.name}', '${item.description}', ${item.quantity}, '${item.tag}')">Request Item</button>
             `;
               itemsDiv.appendChild(div);
             });
           });
       }
 
-      function requestItem(itemId) {
-        fetch("http://127.0.0.1:8000/api/request-item/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ item_id: itemId }),
-        }).then((res) => {
-          if (res.ok) {
-            alert("Request sent!");
-          } else {
-            alert("Failed to request item.");
+      function openModal(id, name, description, quantity, tag) {
+        selectedItemId = id;
+        document.getElementById("modalItemName").textContent = name;
+        document.getElementById("modalItemDescription").textContent =
+          description;
+        document.getElementById("modalItemQuantity").textContent = quantity;
+        document.getElementById("modalItemTag").textContent = tag;
+        document.getElementById("itemModal").style.display = "flex";
+      }
+
+      function closeModal() {
+        document.getElementById("itemModal").style.display = "none";
+      }
+
+      document
+        .getElementById("confirmRequestButton")
+        .addEventListener("click", () => {
+          if (selectedItemId) {
+            fetch("http://127.0.0.1:8000/api/request-item/", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ item_id: selectedItemId }),
+            }).then((res) => {
+              if (res.ok) {
+                alert("Request sent!");
+                closeModal();
+              } else {
+                alert("Failed to request item.");
+              }
+            });
           }
         });
-      }
 
       fetchItems();
     </script>

@@ -6,7 +6,11 @@ app = Flask(__name__,
             static_folder='../frontend')    # Pointing to the frontend folder for static files (CSS, JS, images)
 users = {}  # In-memory user storage for demonstration purposes
 @app.route('/')
- 
+def home():
+    return redirect(url_for('auth'))
+
+#def index():
+# return render_template('index.html')
 
 
 @app.route('/auth', methods=['GET', 'POST'])
@@ -18,8 +22,7 @@ def auth():
         return redirect(url_for('index'))  # Redirect to the homepage after successful login
     return render_template('auth.html')  # Renders auth.html from frontend folder
 
-def index():
-    return render_template('index.html')
+
 
 @app.route('/signup.html', methods=['GET', 'POST'])
 def signup():
@@ -44,6 +47,9 @@ def signin():
         return redirect(url_for('index'))  # Redirect to the homepage after signing in
     return render_template('signin.html')  # Renders signin.html from frontend folder
 
+@app.route('/index.html')
+def index():
+    return render_template('index.html')
 
 
 @app.route('/post_item.html', methods=['GET', 'POST'])
@@ -62,7 +68,12 @@ def request_item():
         item_name = request.form['item_name']
         # Handle item request logic here
         return redirect(url_for('index'))  # Redirect to the homepage after requesting the item
-    return render_template('requestitem.html')  # Renders requestitem.html from frontend folder
+    return render_template('request_item.html')  # Renders requestitem.html from frontend folder
+
+@app.route('/request_not_avail.html')
+def request_not_avail():
+    return render_template('request_not_avail.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

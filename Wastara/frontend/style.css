@@ -1,3 +1,14 @@
+@media (max-width: 768px) {
+  .left-column,
+  .right-column {
+    width: 100%;
+    text-align: center;
+  }
+
+  .right-column img {
+    max-width: 80%;
+  }
+}
 @keyframes slideIn {
   from {
     transform: translateX(-100%);

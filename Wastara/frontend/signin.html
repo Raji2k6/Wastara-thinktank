@@ -2,7 +2,11 @@
 <html>
   <head>
     <title>Sign In</title>
-    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+
     <style>
       /* Center the form on the page */
       body {
@@ -12,8 +16,7 @@
         height: 100vh;
         margin: 0;
         font-family: Arial, sans-serif;
-        background-color: #62ae04; /* Fallback color */
-        background-image: url("darkgreen.jpg"); /* Replace with your background image */
+        background-image: url("{{ url_for('static', filename='darkgreen.jpg') }}"); /* Replace with your background image */
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -97,7 +100,7 @@
         const username = document.getElementById("signin-username").value;
         const password = document.getElementById("signin-password").value;
         alert(`Signed in as ${username}!`);
-        window.location.href = "index.html";
+        window.location.href = "index.html"; // Redirect to the main page after sign-inS
       }
     </script>
   </body>

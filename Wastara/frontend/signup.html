@@ -2,7 +2,11 @@
 <html>
   <head>
     <title>Sign Up</title>
-    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+
     <style>
       /* Center the form on the page */
       body {
@@ -12,8 +16,8 @@
         height: 100vh;
         margin: 0;
         font-family: Arial, sans-serif;
-        background-color: #62ae04; /* Fallback color */
-        background-image: url("darkgreen.jpg"); /* Replace with your background image */
+        /*background-color: #62ae04; /* Fallback color */
+        background-image: url("{{ url_for('static', filename='darkgreen.jpg') }}"); /* Replace with your background image */
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -48,7 +52,7 @@
       /* Style the submit button */
       button {
         width: 100%; /* Ensure the button spans the full width of the form */
-        padding: 12px;
+        padding: 10px;
         background-color: #51901d; /* Green color */
         color: white;
         border: none;
@@ -104,7 +108,7 @@
         const email = document.getElementById("signup-email").value;
         const password = document.getElementById("signup-password").value;
         alert(`Account created for ${username} with email ${email}!`);
-        window.location.href = "index.html";
+        window.location.href = "index.html"; // Redirect to the main page after signup
       }
     </script>
   </body>

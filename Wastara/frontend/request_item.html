@@ -2,12 +2,16 @@
 <html>
   <head>
     <title>Browse Items - Wastara</title>
-    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+
     <style>
       body {
         font-family: Arial, sans-serif;
         background: linear-gradient(to bottom right, #6a11cb, #2575fc);
-        background-image: url("darkgreen.jpg");
+        background-image: url("{{ url_for('static', filename='darkgreen.jpg') }}");
         color: #fff;
         margin: 0;
         padding: 0;
@@ -16,8 +20,27 @@
         align-items: center;
         min-height: 100vh;
       }
+      .top-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: #51901d;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        opacity: 0.8;
+      }
+
+      .top-button:hover {
+        background-color: #2575fc;
+      }
 
       h2 {
+        font-family: "Pacifico", cursive;
         margin-top: 20px;
         font-size: 28px;
         text-align: center;
@@ -78,7 +101,7 @@
       }
 
       .item button {
-        background: #6a11cb;
+        background: #51901d;
         color: #fff;
         border: none;
         padding: 10px 15px;
@@ -86,6 +109,7 @@
         cursor: pointer;
         font-size: 14px;
         transition: background 0.3s ease;
+        opacity: 0.8;
       }
 
       .item button:hover {
@@ -143,6 +167,10 @@
     </style>
   </head>
   <body>
+    <button class="top-button" onclick="redirectToRequestNotAvailable()">
+      Request Item if Not Available
+    </button>
+
     <h2>Available Items</h2>
 
     <label for="filterTag">Filter by Tag:</label>
@@ -157,7 +185,10 @@
 
     <div id="itemsList">
       <div class="item">
-        <img src="wooden chair.jpg" alt="Wood Item" />
+        <img
+          src="{{ url_for('static', filename='wooden chair.jpg') }}"
+          alt="Wood Item"
+        />
         <h3>Wooden Chair</h3>
         <p>A sturdy wooden chair for your home.</p>
         <p><strong>Quantity:</strong> 5</p>
@@ -165,7 +196,10 @@
         <button>Request Item</button>
       </div>
       <div class="item">
-        <img src="metal table.jpg" alt="Metal Item" />
+        <img
+          src="{{ url_for('static', filename='metal table.jpg') }}"
+          alt="Metal Item"
+        />
         <h3>Metal Table</h3>
         <p>A durable metal table for outdoor use.</p>
         <p><strong>Quantity:</strong> 3</p>
@@ -173,7 +207,10 @@
         <button>Request Item</button>
       </div>
       <div class="item">
-        <img src="smartphone.jpg" alt="Electronics Item" />
+        <img
+          src="{{ url_for('static', filename='smartphone.jpg') }}"
+          alt="Electronics Item"
+        />
         <h3>Smartphone</h3>
         <p>A high-end smartphone with great features.</p>
         <p><strong>Quantity:</strong> 10</p>
@@ -181,7 +218,10 @@
         <button>Request Item</button>
       </div>
       <div class="item">
-        <img src="plasticcontainer.jpg" alt="Plastic Item" />
+        <img
+          src="{{ url_for('static', filename='plasticcontainer.jpg') }}"
+          alt="Plastic Item"
+        />
         <h3>Plastic Container</h3>
         <p>A set of plastic containers for storage.</p>
         <p><strong>Quantity:</strong> 20</p>
@@ -189,7 +229,10 @@
         <button>Request Item</button>
       </div>
       <div class="item">
-        <img src="winter jacket.jpg" alt="Clothes Item" />
+        <img
+          src="{{ url_for('static', filename='winter jacket.jpg') }}"
+          alt="Clothes Item"
+        />
         <h3>Winter Jacket</h3>
         <p>A warm winter jacket for cold weather.</p>
         <p><strong>Quantity:</strong> 8</p>
@@ -266,6 +309,9 @@
         });
 
       fetchItems();
+      function redirectToRequestNotAvailable() {
+        window.location.href = "request_not_avail.html"; // Redirect to the request_not_avail.html page
+      }
     </script>
   </body>
 </html>

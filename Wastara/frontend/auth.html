@@ -2,7 +2,11 @@
 <html>
   <head>
     <title>Login / Signup</title>
-    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
       rel="stylesheet"
@@ -10,23 +14,29 @@
   </head>
   <body>
     <div class="left-column">
+      <!-- Top Horizontal Navbar -->
       <h1 class="wastara">Welcome to Wastara!</h1>
+      <p style="font-size: 1.2rem; color: #f0f0f0; margin-top: 10px">
+        Join the movement to turn waste into something wonderful. 🌱
+      </p>
       <p>Are you a new or existing user?</p>
-      <button type="button" onclick="showForm('signup')">New User</button>
-      <button type="button" onclick="showForm('signin')">Existing User</button>
+      <button type="button" onclick="redirectToSignup()">New User</button>
+      <button type="button" onclick="redirectToSignin()">Existing User</button>
     </div>
 
     <div class="right-column">
-      <img src="wastaralogo.jpg" alt="Wastara Logo" />
+      <img
+        src="{{ url_for('static', filename='wastaralogo.jpg') }}"
+        alt="Wastara Logo"
+      />
     </div>
 
     <script>
-      function showForm(type) {
-        if (type === "signup") {
-          window.location.href = "signup.html"; // Redirect to the Sign Up page
-        } else if (type === "signin") {
-          window.location.href = "signin.html"; // Redirect to the Sign In page
-        }
+      function redirectToSignup() {
+        window.location.href = "/signup.html"; // Redirect to the signup page
+      }
+      function redirectToSignin() {
+        window.location.href = "/signin.html"; // Redirect to the signup page
       }
     </script>
   </body>

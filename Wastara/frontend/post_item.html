@@ -2,13 +2,16 @@
 <html>
   <head>
     <title>Post Item - Wastara</title>
-    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
     <style>
       body {
         font-family: Arial, sans-serif;
         background: url("https://via.placeholder.com/1920x1080") no-repeat
           center center fixed;
-        background-image: url("darkgreen.jpg");
+        background-image: url("{{ url_for('static', filename='darkgreen.jpg') }}");
         background-size: cover;
         color: #fff;
         margin: 0;
@@ -129,7 +132,7 @@
           }).then((response) => {
             if (response.ok) {
               alert("Item posted successfully!");
-              document.getElementById("postForm").reset();
+              window.location.href = "/success.html"; // Redirect to the success page
             } else {
               alert("Error posting item.");
             }
